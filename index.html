@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Flipchat — Service Temporarily Unavailable</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <style>
+    :root{
+      --bg:#0f172a;
+      --card:#0b1220;
+      --accent:#7dd3fc;
+      --muted:#94a3b8;
+      --glass: rgba(255,255,255,0.03);
+      --max:900px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(125,211,252,0.06), transparent 8%),
+        radial-gradient(800px 400px at 90% 90%, rgba(139,92,246,0.04), transparent 8%),
+        var(--bg);
+      color:#e6eef8;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    .card{
+      max-width:var(--max);
+      width:100%;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.04);
+      border-radius:14px;
+      padding:28px;
+      box-shadow: 0 10px 40px rgba(2,6,23,0.6);
+      backdrop-filter: blur(6px);
+    }
+    .layout{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:24px;
+      align-items:center;
+    }
+    .left h1{
+      margin:0 0 10px 0;
+      font-size:clamp(22px,3vw,30px);
+      color:var(--accent);
+      letter-spacing:-0.02em;
+    }
+    .lead{
+      color:var(--muted);
+      margin:0 0 16px 0;
+      line-height:1.55;
+      font-size:1rem;
+    }
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+    .btn{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:600;
+      font-size:0.95rem;
+      cursor:pointer;
+    }
+    .btn-primary{
+      background:linear-gradient(90deg,var(--accent),#60a5fa);
+      color:#031024;
+      box-shadow: 0 6px 18px rgba(125,211,252,0.08), inset 0 -2px 0 rgba(0,0,0,0.06);
+      border: none;
+    }
+    .btn-ghost{
+      background:transparent;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.04);
+    }
+    .meta{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+    .right{
+      text-align:center;
+      padding:18px;
+      border-radius:10px;
+      background:var(--glass);
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .emoji{font-size:48px;display:block;margin-bottom:8px}
+    .countdown{font-weight:700;font-size:22px;margin:6px 0 0 0}
+    .small{font-size:0.88rem;color:var(--muted);margin-top:12px}
+    .contact{margin-top:14px;font-size:0.9rem}
+    .contact a{color:var(--accent);text-decoration:none;font-weight:600}
+    .status-bubble{display:inline-block;padding:6px 10px;background:rgba(34,197,94,0.12);color:#bbf7d0;border-radius:999px;font-weight:700;margin-left:8px;font-size:0.85rem}
+    @media (max-width:960px){
+      .layout{grid-template-columns:1fr;gap:16px}
+      .right{order:-1}
+    }
+  </style>
+</head>
+<body>
+  <!--
+    Server-side note:
+    - Return HTTP status code 503 (Service Unavailable).
+    - Optionally include header: Retry-After: 3600  (seconds) or a HTTP-date.
+    - Example (NGINX): add_header Retry-After 3600; return 503;
+  -->
+  <main class="card" role="main" aria-labelledby="title">
+    <div class="layout">
+      <div class="left">
+        <h1 id="title">Flipchat — Service Temporarily Unavailable</h1>
+        <p class="lead">We're sorry — Flipchat is currently undergoing maintenance or experiencing a temporary issue. Our engineers are working to restore service as quickly as possible. We appreciate your patience and will be back online shortly.</p>
+
+        <div class="actions" aria-hidden="false">
+          <a href="/" class="btn btn-primary" title="Go to homepage">Go to Homepage</a>
+          <a href="/status" class="btn btn-ghost" title="Check system status">View Status Page</a>
+          <a href="mailto:support@flipchat.example" class="btn btn-ghost" title="Contact support">Contact Support</a>
+        </div>
+
+        <div class="meta">
+          <div>Estimated downtime: <span id="estimate">Updating…</span></div>
+          <div class="small">We recommend trying again in a few minutes. If the issue persists, please use the status page or contact support.</div>
+        </div>
+
+        <div class="contact">
+          <div class="small">Need urgent help? Email <a href="mailto:support@flipchat.example">support@flipchat.example</a> or DM <a href="https://twitter.com/flipchat" target="_blank" rel="noopener">@flipchat</a>.</div>
+        </div>
+      </div>
+
+      <aside class="right" aria-label="Status and countdown">
+        <div class="emoji" aria-hidden="true">🔧</div>
+        <div style="font-size:18px;font-weight:700">We'll be back soon</div>
+        <div class="countdown" id="count">--:--:--</div>
+        <div class="small">Automatic retry in</div>
+        <div style="margin-top:10px">
+          <span class="status-bubble">STATUS: DOWN</span>
+        </div>
+        <div class="small" style="margin-top:14px">If you'd like updates, enter your email below (we won't spam):</div>
+        <form style="margin-top:10px" onsubmit="subscribe(event)">
+          <input id="email" type="email" placeholder="you@example.com" required
+                 style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Notify me</button>
+          <div id="submsg" class="small" style="margin-top:8px;display:none"></div>
+        </form>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    // Optional: configure expected restore time (ISO format) or set seconds for countdown
+    // Example: set restoreAtISO to a specific time, or set restoreInSeconds to 900 (15 min).
+    const restoreAtISO = null; // e.g. "2025-10-03T18:30:00Z"
+    const restoreInSeconds = 900; // fallback countdown (in seconds). Set to null to disable.
+
+    const countEl = document.getElementById('count');
+    const estEl = document.getElementById('estimate');
+
+    function pad(n){return String(n).padStart(2,'0')}
+
+    function updateCountdown() {
+      let diff = null;
+      if (restoreAtISO) {
+        const t = Date.parse(restoreAtISO);
+        diff = Math.max(0, Math.floor((t - Date.now())/1000));
+      } else if (restoreInSeconds !== null) {
+        // store start to avoid resetting on reload
+        if (!sessionStorage.getItem('flip_restore_start')) {
+          sessionStorage.setItem('flip_restore_start', Date.now());
+        }
+        const start = parseInt(sessionStorage.getItem('flip_restore_start'),10);
+        const elapsed = Math.floor((Date.now() - start)/1000);
+        diff = Math.max(0, restoreInSeconds - elapsed);
+      } else {
+        countEl.textContent = '--:--:--';
+        estEl.textContent = 'unknown';
+        return;
+      }
+
+      const h = Math.floor(diff/3600);
+      const m = Math.floor((diff%3600)/60);
+      const s = diff%60;
+      countEl.textContent = pad(h)+ ':' + pad(m) + ':' + pad(s);
+
+      if (restoreAtISO) {
+        const dt = new Date(restoreAtISO);
+        estEl.textContent = dt.toLocaleString();
+      } else if (restoreInSeconds !== null) {
+        estEl.textContent = `${Math.ceil(diff/60)} minute(s)`;
+      }
+
+      if (diff <= 0) {
+        // Reload page automatically once countdown hits zero
+        countEl.textContent = '00:00:00';
+        estEl.textContent = 'Attempting to reconnect…';
+        setTimeout(()=>location.reload(true), 1200);
+      }
+    }
+
+    // Start interval if countdown is active
+    if (restoreAtISO || restoreInSeconds !== null) {
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+
+    // Minimal "subscribe" mock: replace with your backend or third-party API call
+    function subscribe(e){
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const msg = document.getElementById('submsg');
+      msg.style.display = 'block';
+      msg.textContent = 'Thanks — we will notify you when service is restored (demo).';
+      // TODO: POST to your notification endpoint here.
+    }
+  </script>
+</body>
+</html>
