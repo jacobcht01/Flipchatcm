@@ -1,52 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redirect Page</title>
+  <title>Redirect Page</title>
 </head>
 <body>
 
 <script>
-// List of URLs to redirect to
-var urls = [
-    "https://wa.link/sx1",
-    "https://wa.link/bz1",
-    "https://wa.link/bz2",
+  // List of URLs to redirect to
+  var urls = [
+    "https://wa.link/sx2"
+    ,
+    "https://wa.link/km1",
+    "https://wa.link/km2",
     "https://wa.link/d365",
     "https://wa.link/d366",
     "https://wa.link/d367",
     "https://wa.link/f365",
-    "https://wa.link/f366",
     "https://wa.link/f367",
-    "https://wa.link/km1",
-    "https://wa.link/km2",
-    "https://wa.link/rdy1",
-    "https://wa.link/rdy1",
-    "https://wa.link/khelo",
-    "https://wa.link/khelo",
-    "https://wa.link/ost1",
-    "https://wa.link/ost1",
+    "https://wa.link/f366",
+    "https://wa.link/rdy",
+    "https://wa.link/rdy",
     "https://wa.link/bala1",
     "https://wa.link/bala2",
     "https://wa.link/tiru1",
     "https://wa.link/tiru2",
     "https://wa.link/tiru3",
-    "https://rajwadabook.club/m/home",
-    "https://rajwadabook.club/m/home",
+    "https://wa.link/rajwada01",
+    "https://wa.link/rajwada02",
+    "https://wa.link/rajwada03",
     "https://wa.link/trigo1",
     "https://wa.link/trigo2",
     "https://wa.link/trigo3"
-];
+  ];
 
-// Function to redirect to a random URL from the list
-function redirectToRandomURL() {
-// Generate a random index within the range of the URLs array
-var randomIndex = Math.floor(Math.random() * urls.length);
-// Redirect to the URL at the random index
-window.location.href = urls[randomIndex];
-}
+  // Function to redirect to a random URL from the list
+  function redirectToRandomURL() {
+    // Generate a random index within the range of the URLs array
+    var randomIndex = Math.floor(Math.random() * urls.length);
+    // Redirect to the URL at the random index
+    window.location.href = urls[randomIndex];
+  }
 
-// Call the function when the page loads
-window.onload = redirectToRandomURL;
+  // Call the function when the page loads
+  window.onload = redirectToRandomURL;
 </script>
 
 </body>
